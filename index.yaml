@@ -7,5 +7,5 @@ entries:
     digest: 5cd7211668d5695b042cdb6b1d52fcebedfd10d286c82f5d29d6c8c6a5757f37
     name: resources
     urls:
-    - https://github.com/dsilevi/ds-helm-charts/resources/resources-1.0.0.tgz
+    - https://dsilevi.github.io/ds-helm-charts/resources/resources-1.0.0.tgz
     version: 1.0.0
