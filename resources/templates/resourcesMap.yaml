@@ -1,0 +1,13 @@
+#
+{{- $root := . }}
+{{- if .Values.resourcesMap }}
+# start of configMaps
+{{- range $key, $val := .Values.resourcesMap }}
+{{- if $val.enabled }}
+---
+# values from: {{ $key }}
+{{ include "resource.tplValue" (dict "value" $val.template "context" $root) }}
+{{- end }}
+{{- end }}
+# end of configMaps
+{{- end }}
