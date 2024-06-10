@@ -14,7 +14,7 @@ spec:
     helm:
       valueFiles:
       {{- range .Values.appValueFiles }}
-        - - {{ $.Values.backendRepo }}/{{ $.Values.appBasePath }}/{{ . }}
+        - {{ $.Values.backendRepo }}/{{ $.Values.appBasePath }}/{{ . }}
       {{- end }}
       releaseName: {{ .Values.appBaseName | quote }}
   destination:
