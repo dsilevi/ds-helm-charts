@@ -1,11 +1,21 @@
 apiVersion: v1
 entries:
+  argocd-apps:
+  - apiVersion: v1
+    created: "2024-06-10T14:43:45.926082+03:00"
+    description: ArgoCD applications chart for Kubernetes
+    digest: 7cb49e376ce11204d2c0a730598c215b5bd71612d6634e171ec9cdc098c07339
+    name: argocd-apps
+    urls:
+    - https://dsilevi.github.io/ds-helm-charts/argocd-apps/argocd-apps-1.0.0.tgz
+    version: 1.0.0
   resources:
   - apiVersion: v1
-    created: "2024-05-24T13:45:27.26393+03:00"
+    created: "2024-06-10T14:43:45.926423+03:00"
     description: resources chart for Kubernetes
-    digest: 5cd7211668d5695b042cdb6b1d52fcebedfd10d286c82f5d29d6c8c6a5757f37
+    digest: 7def808b3e3d7830175f0f0d785be0e757080aa81ecf76cf3386935cfd041ea0
     name: resources
     urls:
     - https://dsilevi.github.io/ds-helm-charts/resources/resources-1.0.0.tgz
     version: 1.0.0
+generated: "2024-06-10T14:43:45.925422+03:00"

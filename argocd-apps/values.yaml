@@ -1,0 +1,12 @@
+#
+destination_server: https://kubernetes.default.svc
+backendRepo: "" # "https://dsilevi.github.io/ds-backend-infrastructure"
+appRepo: "" # "https://istio-release.storage.googleapis.com/charts"
+appBaseVersion: "" # "1.22.1"
+appBaseChart: "" # "base"
+appBaseName: "" # "istio-base"
+appBasePath: "" # "environment/default/base"
+appNamespace: "" # "istio-system"
+appValueFiles:
+  - values.yaml
+project: "default"
