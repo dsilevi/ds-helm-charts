@@ -7,16 +7,19 @@ metadata:
     name: {{ .Values.appBaseName }}
 spec:
   project: {{ .Values.project }}
-  source:
-    repoURL: {{ .Values.appRepo | quote }}
-    targetRevision: {{ .Values.appBaseVersion | quote }}
-    chart: {{ .Values.appBaseChart | quote }}
-    helm:
-      valueFiles:
-      {{- range .Values.appValueFiles }}
-        - {{ $.Values.backendRepo }}/{{ $.Values.appBasePath }}/{{ . }}
-      {{- end }}
-      releaseName: {{ .Values.appBaseName | quote }}
+  sources:
+    - repoURL: {{ .Values.appRepo | quote }}
+      targetRevision: {{ .Values.appBaseVersion | quote }}
+      chart: {{ .Values.appBaseChart | quote }}
+      helm:
+        valueFiles:
+        {{- range .Values.appValueFiles }}
+          - $values/{{ $.Values.appBasePath }}/{{ . }}
+        {{- end }}
+        releaseName: {{ .Values.appBaseName | quote }}
+    - repoURL: {{ .Values.backendRepo | quote }}
+      targetRevision: master
+      ref: values
   destination:
     server: {{ .Values.destination_server | quote }}
     namespace: {{ .Values.appNamespace | quote }}
