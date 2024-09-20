@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: {{ .Values.appBaseName }}
-  namespace: argocd
+  namespace: {{ .Values.argocdNamespace }}
   labels:
     name: {{ .Values.appBaseName }}
 spec:
@@ -16,12 +16,17 @@ spec:
         {{- range .Values.appValueFiles }}
           - $values/{{ $.Values.appBasePath }}/{{ . }}
         {{- end }}
+        {{- if .Values.appReleaseName }}
+        releaseName: {{ .Values.appReleaseName | quote }}
+        {{- else }}
         releaseName: {{ .Values.appBaseName | quote }}
+        {{- end }}
     - repoURL: {{ .Values.backendRepo | quote }}
-      targetRevision: master
+      targetRevision: {{ .Values.backendRepoBranch }}
       ref: values
   destination:
     server: {{ .Values.destination_server | quote }}
+    name: {{ .Values.clusterName | quote }}
     namespace: {{ .Values.appNamespace | quote }}
   syncPolicy:
     automated:
