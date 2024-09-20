@@ -10,3 +10,6 @@ appNamespace: "" # "istio-system"
 appValueFiles:
   - values.yaml
 project: "default"
+argocdNamespace: argocd
+backendRepoBranch: main
+destination_server: ""

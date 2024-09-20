@@ -1,0 +1,52 @@
+apiVersion: v1
+entries:
+  argocd-apps:
+  - apiVersion: v1
+    created: "2024-09-20T15:44:03.414343+03:00"
+    description: ArgoCD applications chart for Kubernetes
+    digest: 06ab20fc4cdbbfdd684c7537b1268e6745558d744378c7d390d3095f71f35f14
+    name: argocd-apps
+    urls:
+    - argocd-apps-1.4.0.tgz
+    version: 1.4.0
+  - apiVersion: v1
+    created: "2024-09-20T15:44:03.413967+03:00"
+    description: ArgoCD applications chart for Kubernetes
+    digest: be5c6a3e406cec2cf63602ba8e9e122dff7ef788af4245dda8ac85b8d4e4be3e
+    name: argocd-apps
+    urls:
+    - argocd-apps-1.3.0.tgz
+    version: 1.3.0
+  - apiVersion: v1
+    created: "2024-09-20T15:44:03.413595+03:00"
+    description: ArgoCD applications chart for Kubernetes
+    digest: af1b74c74bff9a5929b40cff99cbcd2d160ce73a715fff08213fd6c4cea84e4d
+    name: argocd-apps
+    urls:
+    - argocd-apps-1.2.0.tgz
+    version: 1.2.0
+  - apiVersion: v1
+    created: "2024-09-20T15:44:03.413265+03:00"
+    description: ArgoCD applications chart for Kubernetes
+    digest: db907caf98abb3fd88fe777924bf1f5428fd4c1d36414fb53c7a1153877caa14
+    name: argocd-apps
+    urls:
+    - argocd-apps-1.1.0.tgz
+    version: 1.1.0
+  - apiVersion: v1
+    created: "2024-09-20T15:44:03.411189+03:00"
+    description: ArgoCD applications chart for Kubernetes
+    digest: d41b8c0edfdd838d8b19630883aeb0d034af82f4f6b75f215091f314dd426fb4
+    name: argocd-apps
+    urls:
+    - argocd-apps-1.0.1.tgz
+    version: 1.0.1
+  - apiVersion: v1
+    created: "2024-09-20T15:44:03.410821+03:00"
+    description: ArgoCD applications chart for Kubernetes
+    digest: 7cb49e376ce11204d2c0a730598c215b5bd71612d6634e171ec9cdc098c07339
+    name: argocd-apps
+    urls:
+    - argocd-apps-1.0.0.tgz
+    version: 1.0.0
+generated: "2024-09-20T15:44:03.409905+03:00"
