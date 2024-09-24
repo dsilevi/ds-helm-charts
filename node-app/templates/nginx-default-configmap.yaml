@@ -1,0 +1,10 @@
+#nginx configmap
+{{- if .Values.nginx.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-nginx-server-config
+  namespace: {{ .Values.namespace }}
+data:
+  default.conf: {{ tpl .Values.configs.nginx.nginxdefaultconf $ | toYaml | indent 2 }}
+{{- end }}

@@ -1,0 +1,9 @@
+{{- if .Values.nginx.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-fastcgiconf
+  namespace: {{ .Values.namespace }}
+data:
+  fastcgi.conf: {{ tpl .Values.configs.nginx.fastcgiconf $ | toYaml | indent 2 }}
+{{- end }}

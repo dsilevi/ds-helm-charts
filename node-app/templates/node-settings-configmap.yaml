@@ -1,0 +1,11 @@
+{{- if .Values.nodeSettings.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-settings
+  namespace: {{ .Values.namespace }}
+  labels:
+    {{- include "chart.labels" . | nindent 4 }}
+data:
+  node-settings.conf: {{ tpl .Values.configs.node.settings $ | toYaml | indent 2 }}
+{{- end }}

@@ -1,0 +1,176 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "chart.fullname" . }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    {{- include "chart.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "chart.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      annotations:
+        updateTimestamp: {{ .Values.deployment.updateTimestamp | quote | default "null" }}
+      {{- with .Values.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "chart.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "chart.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      volumes:
+        {{- if .Values.nodeSettings.enabled }}
+        - name: node-settings
+          configMap:
+            name: {{ .Release.Name }}-settings
+        {{- end }}
+        {{- if .Values.envFromDotenv.enabled }}
+        - name: sms-sender-env-secret
+          secret:
+            secretName: {{ .Release.Name }}-env-secret
+            items:
+              - key: .env
+                path: .env
+        {{- end }}
+        {{- if .Values.nginx.enabled }}
+        - name: nginxconf-config
+          configMap:
+            name: {{ .Release.Name }}-nginxconf
+        - name: fastcgiconf-config
+          configMap:
+            name: {{ .Release.Name }}-fastcgiconf
+        - name: nginxsnippets-config
+          configMap:
+            name: {{ .Release.Name }}-nginxsnippets
+        {{- end }}
+        - name: {{ .Release.Name }}-shared-files
+          emptyDir: {}
+        - name: config-copy
+          emptyDir: {}
+        {{- if .Values.cron.enabled }}
+        - name: crontab
+          configMap:
+            name: {{ .Release.Name }}-crontab
+        {{- end }}
+
+      initContainers:
+        - name: init-config-copy
+          image: busybox
+          command: ['sh', '-c', 'cp -r /config/* /config-copy/']
+          volumeMounts:
+            {{- if .Values.nodeSettings.enabled }}
+            - name: node-settings
+              mountPath: /config/node-settings
+            {{- end }}
+            {{- if .Values.envFromDotenv.enabled }}
+            - name: sms-sender-env-secret
+              mountPath: /config/env-secret
+            {{- end }}
+            {{- if .Values.nginx.enabled }}
+            - name: nginxconf-config
+              mountPath: /config/nginxconf
+            - name: fastcgiconf-config
+              mountPath: /config/fastcgiconf
+            - name: nginxsnippets-config
+              mountPath: /config/nginxsnippets
+            {{- end }}
+            - name: config-copy
+              mountPath: /config-copy
+
+      containers:
+        - name: app
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy | default "IfNotPresent" }}
+          command: {{ toJson .Values.command }}
+          args: {{ toJson .Values.args }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.port }}
+              protocol: TCP
+          livenessProbe:
+            exec:
+              command:
+                - echo
+                - "healthy"
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          readinessProbe:
+            exec:
+              command:
+                - echo
+                - "healthy"
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          volumeMounts:
+            - name: config-copy
+              mountPath: {{ .Values.settingsPath}}config-copy
+            {{- if .Values.nodeSettings.enables }}
+            - name: node-settings
+              mountPath: {{ .Values.nodeSettings.path }}node-settings.conf
+              subPath: node-settings.conf
+            {{- end }}
+            {{- if .Values.envFromDotenv.enabled }}
+            - name: config-copy
+              mountPath: {{ .Values.secretPath }}.env
+              subPath: env-secret/.env
+            {{- end }}
+            {{- if .Values.cron.enabled }}
+            - name: crontab
+              mountPath: /var/spool/cron/crontabs/{{ .Values.cron.user }}
+              subPath: crontab
+            {{- end }}
+          {{- if .Values.envFromSecret.enabled }}
+          envFrom:
+            - secretRef:
+                name: {{ .Release.Name }}-secret
+          {{- end }}
+          lifecycle:
+            {{- toYaml .Values.lifecycle | nindent 12 }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+        {{- if .Values.nginx.enabled }}
+        - name: nginx
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.nginx.image.repository }}:{{ .Values.nginx.image.tag }}"
+          imagePullPolicy: {{ .Values.nginx.image.pullPolicy }}
+          volumeMounts:
+            - name: {{ .Release.Name }}-shared-files
+              mountPath: /var/www
+            - name: config-copy
+              mountPath: /etc/nginx/nginx.conf
+              subPath: nginxconf/nginx.conf
+            - name: config-copy
+              mountPath: /etc/nginx/fastcgi.conf
+              subPath: fastcgiconf/fastcgi.conf
+            - name: config-copy
+              mountPath: /etc/nginx/snippets
+              subPath: nginxsnippets
+          resources:
+            {{- toYaml .Values.nginx.resources | nindent 12 }}
+        {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

@@ -1,0 +1,11 @@
+{{- if .Values.cron.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-crontab
+  namespace: {{ .Values.namespace }}
+  labels:
+    {{- include "chart.labels" . | nindent 4 }}
+data:
+  crontab: {{ tpl .Values.configs.crontab $ | toYaml | indent 2 }}
+{{- end }}
