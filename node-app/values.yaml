@@ -25,6 +25,9 @@ envFromSecret:
 envFromDotenv:
   enabled: false
 
+ipv6Stack:
+  disabled: false
+
 cron:
   enabled: false
   user: "root"
