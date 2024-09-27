@@ -16,17 +16,12 @@ secretPath: "/var/www/"
 nodeSettings:
   enabled: false
   path: "/var/www/"
-deployment:
-  updateTimeStamp: ""
 
 envFromSecret:
   enabled: false
 
 envFromDotenv:
   enabled: false
-
-ipv6Stack:
-  disabled: false
 
 cron:
   enabled: false
