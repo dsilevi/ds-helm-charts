@@ -67,7 +67,7 @@ spec:
       initContainers:
         - name: init-config-copy
           image: busybox
-          command: ['sh', '-c', 'cp -r /config/* /config-copy/']
+          command: ['sh', '-c', 'mkdir -p /config && touch /config/test && cp -r /config/* /config-copy/']
           volumeMounts:
             {{- if .Values.nodeSettings.enabled }}
             - name: node-settings
