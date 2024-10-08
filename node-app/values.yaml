@@ -23,6 +23,11 @@ envFromSecret:
 envFromDotenv:
   enabled: false
 
+migrationContainer:
+  enabled: false
+  command: []
+  args: []
+
 cron:
   enabled: false
   user: "root"
