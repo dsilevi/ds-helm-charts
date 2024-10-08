@@ -2,7 +2,7 @@ apiVersion: v1
 entries:
   argocd-apps:
   - apiVersion: v1
-    created: "2024-09-27T15:29:20.58849+03:00"
+    created: "2024-10-08T16:30:21.344176+03:00"
     description: ArgoCD applications chart for Kubernetes
     digest: 06ab20fc4cdbbfdd684c7537b1268e6745558d744378c7d390d3095f71f35f14
     name: argocd-apps
@@ -10,7 +10,7 @@ entries:
     - argocd-apps/argocd-apps-1.4.0.tgz
     version: 1.4.0
   - apiVersion: v1
-    created: "2024-09-27T15:29:20.58827+03:00"
+    created: "2024-10-08T16:30:21.344012+03:00"
     description: ArgoCD applications chart for Kubernetes
     digest: be5c6a3e406cec2cf63602ba8e9e122dff7ef788af4245dda8ac85b8d4e4be3e
     name: argocd-apps
@@ -18,7 +18,7 @@ entries:
     - argocd-apps/argocd-apps-1.3.0.tgz
     version: 1.3.0
   - apiVersion: v1
-    created: "2024-09-27T15:29:20.588099+03:00"
+    created: "2024-10-08T16:30:21.343841+03:00"
     description: ArgoCD applications chart for Kubernetes
     digest: af1b74c74bff9a5929b40cff99cbcd2d160ce73a715fff08213fd6c4cea84e4d
     name: argocd-apps
@@ -26,7 +26,7 @@ entries:
     - argocd-apps/argocd-apps-1.2.0.tgz
     version: 1.2.0
   - apiVersion: v1
-    created: "2024-09-27T15:29:20.587878+03:00"
+    created: "2024-10-08T16:30:21.343505+03:00"
     description: ArgoCD applications chart for Kubernetes
     digest: db907caf98abb3fd88fe777924bf1f5428fd4c1d36414fb53c7a1153877caa14
     name: argocd-apps
@@ -34,7 +34,7 @@ entries:
     - argocd-apps/argocd-apps-1.1.0.tgz
     version: 1.1.0
   - apiVersion: v1
-    created: "2024-09-27T15:29:20.587634+03:00"
+    created: "2024-10-08T16:30:21.343252+03:00"
     description: ArgoCD applications chart for Kubernetes
     digest: d41b8c0edfdd838d8b19630883aeb0d034af82f4f6b75f215091f314dd426fb4
     name: argocd-apps
@@ -42,7 +42,7 @@ entries:
     - argocd-apps/argocd-apps-1.0.1.tgz
     version: 1.0.1
   - apiVersion: v1
-    created: "2024-09-27T15:29:20.587395+03:00"
+    created: "2024-10-08T16:30:21.343033+03:00"
     description: ArgoCD applications chart for Kubernetes
     digest: 7cb49e376ce11204d2c0a730598c215b5bd71612d6634e171ec9cdc098c07339
     name: argocd-apps
@@ -52,7 +52,7 @@ entries:
   longhorn-custom:
   - apiVersion: v1
     appVersion: v1.6.2
-    created: "2024-09-27T15:29:20.591067+03:00"
+    created: "2024-10-08T16:30:21.34798+03:00"
     description: Longhorn is a distributed block storage system for Kubernetes.
     digest: b3796069bb04c83688077f2b7bec7ebda7f66c653750584f03468c10a5a5839f
     home: https://github.com/longhorn/longhorn
@@ -84,7 +84,16 @@ entries:
     version: 1.6.2
   node-app:
   - apiVersion: v2
-    created: "2024-09-27T15:29:20.596537+03:00"
+    created: "2024-10-08T16:30:21.353499+03:00"
+    description: A Helm chart for Kubernetes
+    digest: ed4fcc07d2fe130956bb75a11efc95c50cc531390f33ae18c262b9808f3a7076
+    name: node-app
+    type: application
+    urls:
+    - node-app/node-app-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v2
+    created: "2024-10-08T16:30:21.351863+03:00"
     description: A Helm chart for Kubernetes
     digest: 24127ea19f7f4365b419124b1564176bef1dec354ded1beaeb47f989fb7e5fab
     name: node-app
@@ -93,7 +102,7 @@ entries:
     - node-app/node-app-0.1.3.tgz
     version: 0.1.3
   - apiVersion: v2
-    created: "2024-09-27T15:29:20.595056+03:00"
+    created: "2024-10-08T16:30:21.350693+03:00"
     description: A Helm chart for Kubernetes
     digest: f00b8a2d9fe5379bf3c3f5f189f8f077a13fd66e730be3058a37baf6fdc643dc
     name: node-app
@@ -102,7 +111,7 @@ entries:
     - node-app/node-app-0.1.2.tgz
     version: 0.1.2
   - apiVersion: v2
-    created: "2024-09-27T15:29:20.59414+03:00"
+    created: "2024-10-08T16:30:21.349404+03:00"
     description: A Helm chart for Kubernetes
     digest: b3e0126e316a17286f766338571a0a0b36e60ce561563bc4602a291607c2459a
     name: node-app
@@ -111,7 +120,7 @@ entries:
     - node-app/node-app-0.1.1.tgz
     version: 0.1.1
   - apiVersion: v2
-    created: "2024-09-27T15:29:20.593511+03:00"
+    created: "2024-10-08T16:30:21.348665+03:00"
     description: A Helm chart for Kubernetes
     digest: c0e41ec0a5350d85cd96ad71789430692f0e869584ab1edc849d793592ab2ad2
     name: node-app
@@ -121,11 +130,11 @@ entries:
     version: 0.1.0
   resources:
   - apiVersion: v1
-    created: "2024-09-27T15:29:20.596839+03:00"
+    created: "2024-10-08T16:30:21.353834+03:00"
     description: resources chart for Kubernetes
     digest: 7def808b3e3d7830175f0f0d785be0e757080aa81ecf76cf3386935cfd041ea0
     name: resources
     urls:
     - resources/resources-1.0.0.tgz
     version: 1.0.0
-generated: "2024-09-27T15:29:20.586777+03:00"
+generated: "2024-10-08T16:30:21.342212+03:00"
