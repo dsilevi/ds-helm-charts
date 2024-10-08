@@ -86,6 +86,36 @@ spec:
             {{- end }}
             - name: config-copy
               mountPath: /config-copy
+        {{- if .Values.migrationContainer.enabled }}
+        - name: migration
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy | default "IfNotPresent" }}
+          command: {{ toJson .Values.migrationContainer.command }}
+          args: {{ toJson .Values.migrationContainer.args }}
+          volumeMounts:
+            - name: config-copy
+              mountPath: {{ .Values.settingsPath}}config-copy
+            {{- if .Values.nodeSettings.enables }}
+            - name: node-settings
+              mountPath: {{ .Values.nodeSettings.path }}node-settings.conf
+              subPath: node-settings.conf
+            {{- end }}
+            {{- if .Values.envFromDotenv.enabled }}
+            - name: config-copy
+              mountPath: {{ .Values.secretPath }}.env
+              subPath: env-secret/.env
+            {{- end }}
+            {{- if .Values.cron.enabled }}
+            - name: crontab
+              mountPath: /var/spool/cron/crontabs/{{ .Values.cron.user }}
+              subPath: crontab
+            {{- end }}
+          {{- if .Values.envFromSecret.enabled }}
+          envFrom:
+            - secretRef:
+                name: {{ .Release.Name }}-secret
+          {{- end }}
+        {{- end }}
 
       containers:
         - name: app
